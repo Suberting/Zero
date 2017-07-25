@@ -1,0 +1,67 @@
+public class Solution {
+    public ListNode AddTwoNumbers(ListNode l1, ListNode l2) {
+        int sum = l1.val + l2.val;
+            int val = sum % 10;
+            int flag = sum / 10;
+            l1.val = val;
+            l1.next = addTwoNumber(l1.next, l2.next, flag);
+            return l1;
+    }
+    
+    public ListNode addTwoNumber(ListNode l1, ListNode l2, int flag)
+        {
+            if (l1 == null && l2 == null) 
+            { 
+                if( flag == 1 )
+                {
+                    return new ListNode(1);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else {
+                if (l1 == null)
+                {
+                    if(flag == 1)
+                    {
+                        l2.val++;
+                        if (l2.val > 9) { l2.val = 0; l2.next = addTwoNumber(l1, l2.next, 1); }
+                        else { l2.next = addTwoNumber(l1, l2.next, 0); }
+                    }
+                    else
+                    {
+                        l2.next = addTwoNumber(l1, l2.next, 0);
+                    }
+                    return l2;
+                }
+                else
+                {
+                    if(l2 == null)
+                    {
+                        if (flag == 1)
+                        {
+                            l1.val++;
+                            if (l1.val > 9) { l1.val = 0; l1.next = addTwoNumber(l1.next, l2, 1); }
+                            else { l1.next = addTwoNumber(l1.next, l2, 0); }
+                        }
+                        else
+                        {
+                            l1.next = addTwoNumber(l1.next, l2, 0);
+                        }
+                        return l1;
+                    }
+                    else
+                    {
+                        int sum = l1.val + l2.val + flag;
+                        int val = sum % 10;
+                        int temp = sum / 10;
+                        l1.val = val;
+                        l1.next = addTwoNumber(l1.next, l2.next, temp);
+                        return l1;
+                    }
+                }
+            }
+        }
+}
