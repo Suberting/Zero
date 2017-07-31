@@ -1,0 +1,35 @@
+public class Solution {
+    public int LengthOfLongestSubstring(string s) {
+        var maxNumber = 0;
+            if (s.Length == 0) return 0;
+            if (s.Length == 1) return 1;
+            var count = 1;
+            var code = new List<char> { s[0] };
+            var temp = 1;
+            for (var i = 0; i < s.Length; i = i + 1)
+            {
+                var flag = true;
+                for (var j = count; j < s.Length; j++)
+                {
+                    if (Enumerable.Contains(code, s[j]))
+                    {
+                        flag = false;
+                    }
+                    if (flag)
+                    {
+                        temp++;
+                        code.Add(s[j]);
+                    }
+                    else
+                    {
+                        code.RemoveAt(0);
+                        count = j;
+                        break;
+                    }
+                }
+                if (temp > maxNumber) maxNumber = temp;
+                temp--;
+            }
+            return maxNumber;
+    }
+}
