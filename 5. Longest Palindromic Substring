@@ -1,0 +1,33 @@
+public class Solution {
+    public string LongestPalindrome(string s) {
+    var newString = new StringBuilder(null);
+        var maxlength = 0;
+        for (var i = 0; i < s.Length; i++)
+        {
+            var tempString = new StringBuilder(null);
+            var temp = 1;
+            var j = i + 1;
+            tempString.Append(s[i]);
+            for (; j < s.Length && s[i] == s[j]; j++)
+            {
+                temp++;
+                tempString.Append(s[j]);
+            }
+            var p1 = i - 1;
+            var p2 = j;
+            while (p1 >= 0 && p2 < s.Length && s[p1] == s[p2])
+            {
+                temp += 2;
+                tempString.Insert(0, s[p1]);
+                tempString.Append(s[p2]);
+                p1--;
+                p2++;
+            }
+            if (temp <= maxlength) continue;
+            newString = tempString;
+            maxlength = temp;
+        }
+        string result = newString.ToString();
+        return result;
+    }
+}
