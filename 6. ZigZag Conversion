@@ -1,0 +1,23 @@
+public class Solution {
+    public string Convert(string s, int numRows) {
+        if (numRows == 1) return s;
+        else
+        {
+            var newString = new StringBuilder();
+            for (var rownum = 0; rownum < numRows; rownum++)
+            {
+                for (var colnum = 0; 2 * (numRows -1) * colnum + rownum < s.Length; colnum++)
+                {
+                    newString.Append(s[2*(numRows-1)*colnum + rownum]);
+                    if (2*(numRows - 1)*colnum + 2*(numRows - 1) - rownum < s.Length
+                        && 2*(numRows - 1)*colnum + 2*(numRows - 1) - rownum != 2*(numRows - 1)*(colnum + 1) + rownum
+                        && 2*(numRows - 1)*colnum + 2*(numRows - 1) - rownum != 2*(numRows - 1)*colnum + rownum)
+                    {
+                        newString.Append(s[2*(numRows - 1)*colnum + 2*(numRows - 1) - rownum]);
+                    }
+                }
+            }
+            return newString.ToString();
+        }
+    }
+}
