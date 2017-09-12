@@ -1,0 +1,38 @@
+public class Solution {
+    public int Reverse(int x)
+        {
+            if (x >= 0)
+            {
+                var secondint = BinaryReverse(x.ToString());
+                if (secondint.Length <= 9)
+                {
+                    return Convert.ToInt32(secondint);
+                }
+                return string.Compare(secondint, "2147483647", StringComparison.Ordinal) > 0 ? 0 : Convert.ToInt32(secondint);
+            }
+            else
+            {
+                var secondint = BinaryReverse(x.ToString().Remove(0,1));
+                if (secondint.Length <= 9)
+                {
+                    return (Convert.ToInt32(secondint)*-1);
+                }
+                return string.Compare("2147483648", secondint, StringComparison.Ordinal) < 0 ? 0 : (Convert.ToInt32(secondint)*-1);
+            }
+        }
+
+        public static string BinaryReverse(string text)
+        {
+            var charArray = text.ToCharArray();
+            var len = text.Length - 1;
+
+            for (var i = 0; i < len; i++, len--)
+            {
+                var tmp = charArray[i];
+                charArray[i] = charArray[len];
+                charArray[len] = tmp;
+            }
+
+            return new string(charArray);
+        }
+}
