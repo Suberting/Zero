@@ -1,0 +1,45 @@
+public class Solution {
+    public bool IsPalindrome(int x)
+        {
+            if (x < 0)
+            {
+                return false;
+            }
+            if (x > 1000000000)
+            {
+                var length = 1;
+                while (x / Math.Pow(10, length) > 1)
+                {
+                    length++;
+                }
+                return Solutionn2(x, length);
+            }
+            else
+            {
+                var length = 1;
+                while (x / length > 0)
+                {
+                    length *= 10;
+                }
+                return Solutionn1(x, length);
+            }
+        }
+
+        public bool Solutionn1(int x, int length)
+        {
+            if (length <= 10)
+            {
+                return true;
+            }
+            return x % 10 == x / (length / 10) && Solutionn1(x % (length / 10) / 10, length / 100);
+        }
+
+        public bool Solutionn2(double x, int length)
+        {
+            if (length <= 1)
+            {
+                return true;
+            }
+            return Equals((int)x % 10, (int)(x / Math.Pow(10, length - 1))) && Solutionn2(x % Math.Pow(10, length - 1) / 10, length - 2);
+        }
+}
